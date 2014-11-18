@@ -1,12 +1,12 @@
 package com.projekt.zespolowy.generator;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class FreakyGenerator extends Generator {
 
@@ -19,7 +19,7 @@ public class FreakyGenerator extends Generator {
 	private static final long serialVersionUID = -1341784248038743032L;
 	private Random r;
 	private Paint paint;
-	private List<Obszar> obszary = new LinkedList<Obszar>();
+	private List<Obszar> obszary;
 
 	private class Obszar {
 		private float startX, startY, stopX, stopY;
@@ -60,6 +60,7 @@ public class FreakyGenerator extends Generator {
 		paint = new Paint();
 		paint.setColor(KOLOR_LINII);
 		r = new Random(seed);
+        obszary = new LinkedList<Obszar>();
 		obszary.add(new Obszar(0, 0, w, h));
 		int n = r.nextInt(MAX_ILOSC_OBSZAROW / 2);
 		for (int i = 0; i < n; i++) {
@@ -99,8 +100,7 @@ public class FreakyGenerator extends Generator {
 	}
 
 	private float randomFloat(float a, float b) {
-		float rand = r.nextFloat() * (b - a) + a;
-		return rand;
+        return r.nextFloat() * (b - a) + a;
 	}
 
 	@Override

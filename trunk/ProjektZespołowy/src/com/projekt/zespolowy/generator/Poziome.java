@@ -1,8 +1,9 @@
 package com.projekt.zespolowy.generator;
+
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
- 
+
 import java.util.Random;
  
 /**
