@@ -27,7 +27,7 @@
         android:layout_toRightOf="@+id/textView2"
         android:ems="10"
         android:inputType="number"
-        android:hint="42" />
+        android:hint="@string/seed" />
 
     <TextView
         android:id="@+id/textView2"
