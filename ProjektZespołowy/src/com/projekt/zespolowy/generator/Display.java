@@ -32,6 +32,7 @@ public class Display extends Activity {
 		@Override
 		protected void onDraw(Canvas canvas) {
 			super.onDraw(canvas);
+            if (bitmap == null) return;
 			canvas.drawBitmap(bitmap, null, new Rect(0, 0, canvas.getWidth(),
 					canvas.getHeight()), null);
 		}
