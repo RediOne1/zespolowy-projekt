@@ -43,27 +43,17 @@ public class MainSkaner extends Activity implements OnClickListener {
         baseBtn = (View) findViewById(R.id.base_img_layout);
         scanBtn = (View) findViewById(R.id.scan_img_layout);
 
-        registerForContextMenu(scanBtn);
+        scanBtn.setOnClickListener(this);
         baseBtn.setOnClickListener(this);
         shareBtn.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_skaner, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
-    }
-
+    /**
+     * Tworzy menu kontekstowe na podstawie szablonu z pliku xml.
+     * @param menu
+     * @param v Obiekt który został przytrzymany, lub który wywołał menu kontekstowe.
+     * @param menuInfo
+     */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -73,6 +63,11 @@ public class MainSkaner extends Activity implements OnClickListener {
         }
     }
 
+    /**
+     * Funkcja wywoływana po kliknieciu obiektu w menu kontekstowym
+     * @param item obiekt wybrany w menu kontekstowym
+     * @return zwraca prawde jesli wybrany obiekt wywołał jakąś funkcję
+     */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         super.onContextItemSelected(item);
@@ -95,6 +90,12 @@ public class MainSkaner extends Activity implements OnClickListener {
         return result;
     }
 
+    /**
+     * Funkcja która odbiera wynik wywołanych aktywności, w naszym przypdaku wywołujemy galerie lub aparat.
+     * @param requestCode dowolny kod, który przypisujemy do wywołanej aktywności żeby później wiedzieć który wynik dotyczy którego wywołania
+     * @param resultCode kod zwracany razem z wynikiem wywołania aktywności, informuje nas jaki był rezultat wywołania.
+     * @param data dane wynikowe wywołania
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -161,6 +162,9 @@ public class MainSkaner extends Activity implements OnClickListener {
         }
     }
 
+    /**
+     * Funkcja wywołują aktywność w celu wysłania tekstu z pola "seed do wysłania"
+     */
     private void share() {
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
@@ -178,6 +182,7 @@ public class MainSkaner extends Activity implements OnClickListener {
                     Intent.ACTION_PICK,
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, REQ_CODE_PICK_IMAGE_BASE);
-        }
+        } else if(v == scanBtn)
+            openContextMenu(v);
     }
 }
