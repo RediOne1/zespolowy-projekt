@@ -15,5 +15,8 @@
     <string name="skanowane_zdjecie">Zeskanowane zdjęcie</string>
     <string name="porownaj">Porównaj</string>
     <string name="seed">Seed</string>
+    <string name="zrob_zdjecie">Zrób zdjęcie</string>
+    <string name="wybierz_zdjecie">Wybierz zdjęcie</string>
+    <string name="wybierz_opcje">Wybierz opcje</string>
 
 </resources>
