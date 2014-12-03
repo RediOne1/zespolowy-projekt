@@ -1,3 +1,6 @@
+/**
+ * Moduł skanujący i porównujący.
+ */
 package com.projekt.zespolowy.skaner;
 
 import android.app.Activity;

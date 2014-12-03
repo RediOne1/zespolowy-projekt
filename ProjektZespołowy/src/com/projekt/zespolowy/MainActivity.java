@@ -1,3 +1,8 @@
+/**
+ * \mainpage
+ * Tu będzie ogólny opis całego projektu
+ */
+
 package com.projekt.zespolowy;
 
 import android.app.Activity;
