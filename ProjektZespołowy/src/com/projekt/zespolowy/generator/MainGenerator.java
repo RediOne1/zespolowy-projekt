@@ -14,9 +14,13 @@ import android.widget.Spinner;
 import com.projekt.zespolowy.R;
 
 /**
- * Główny widok z guzikami itp. Odpala {@link Display} czy coś w tym stylu.
+ * Interfejs modułu generatora.
+ *
+ * Pozwala użytkownikowi wybrać generator spośród dostępnych, pobiera parametr seed i wywołuje
+ * {@link Display}.
  */
 public class MainGenerator extends Activity implements OnClickListener {
+
 	private Button generateBtn;
 
 	@Override
@@ -26,21 +30,20 @@ public class MainGenerator extends Activity implements OnClickListener {
 
 		generateBtn = (Button) findViewById(R.id.generateButton);
 		generateBtn.setOnClickListener(this);
+
+		// budowanie listy dostępnych generatorów
 		Spinner spinner = (Spinner) findViewById(R.id.generatorsSpinner);
 		ArrayAdapter<Generator> adapter = new ArrayAdapter<Generator>(this,
-				android.R.layout.simple_list_item_1, generators);
+		                                  android.R.layout.simple_list_item_1, generators);
 		spinner.setAdapter(adapter);
 		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int position, long id) {
-				selectedGenerator = (Generator) parent
-						.getItemAtPosition(position);
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				selectedGenerator = (Generator) parent.getItemAtPosition(position);
 			}
 
 			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-			}
+			public void onNothingSelected(AdapterView<?> parent) {}
 		});
 	}
 
@@ -58,7 +61,9 @@ public class MainGenerator extends Activity implements OnClickListener {
 		startActivity(intent);
 	}
 
-	static Generator[] generators = { new LinesGenerator(), new ExampleGenerator(), new FreakyGenerator(), new Poziome() };
+	/// lista dostępnych generatorów
+	static Generator[] generators = { new LinesGenerator(), new ExampleGenerator(),
+	                                new FreakyGenerator(), new Poziome() };
 	Generator selectedGenerator = generators[0];
 	
 	@Override
