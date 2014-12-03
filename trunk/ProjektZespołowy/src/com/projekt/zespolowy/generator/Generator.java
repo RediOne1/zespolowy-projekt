@@ -5,6 +5,11 @@ import android.graphics.Canvas;
 
 import java.io.Serializable;
 
+/**
+ * Klasa podstawowa wszystkich generatorów obrazków.
+ *
+ * Klasy pochodne muszą zaimplementować metodę {@link generate}.
+ */
 public abstract class Generator implements Serializable
 {
 	private static final long serialVersionUID = -8690093341007522387L;
@@ -18,20 +23,19 @@ public abstract class Generator implements Serializable
 	}
 
 	/**
-	 * Bierze seed, szerokosc i wysokość ekranu i zwraca Bitmap.
+	 * Generuje pseudolosową bitmapę o zadanych wymiarach na podstawie podanego seeda.
 	 *
-	 * Najpierw wywołać init(w,h), potem używać funkcji Canvasa do rysowania. Na koniec
+	 * Najpierw wywołać init(w,h), potem można używać funkcji Canvasa do rysowania. Na koniec
 	 * zwrócić bitmap.
 	 *
 	 * Zobacz przykład w {@link ExampleGenerator}
 	 *
-	 * Po zaimplementowaniu dopisać do listy "generatory" w {@link MainGenerator}
-	 *
-	 * @param w szerokość
-	 * @param h wysokość
+	 * @param w szerokość rządanej bitmapy
+	 * @param h wysokość rządanej bitmapy
 	 */
 	public abstract Bitmap generate(long seed, int w, int h);
 
+	/// Zwraca nazwę generatora
 	@Override
 	public String toString()
 	{

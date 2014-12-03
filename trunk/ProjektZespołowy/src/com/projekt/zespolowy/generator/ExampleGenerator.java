@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import java.util.Random;
 
 /**
- * Generator zapełniający obrazek losowo białymi i czarnymi pikselami.
+ * Przykładowy generator zapełniający obrazek losowo białymi i czarnymi pikselami.
  */
 public class ExampleGenerator extends Generator
 {
@@ -19,12 +19,10 @@ public class ExampleGenerator extends Generator
 		Random r = new Random(seed);
 		for (int y = 0; y<h; y++){
 			for (int x = 0; x<w; x++){
-				if (r.nextDouble()<0.25){
+				if (r.nextDouble()<0.25)
 					paint.setColor(Color.WHITE);
-				}
-				else{
+				else
 					paint.setColor(Color.BLACK);
-				}
 				canvas.drawPoint(x, y, paint);
 			}
 		}
