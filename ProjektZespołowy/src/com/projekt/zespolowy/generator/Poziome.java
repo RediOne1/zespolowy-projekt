@@ -11,13 +11,16 @@ import java.util.Random;
  * Generator rysuje linie w poziomie i w pionie.
  * 
  * @author Kamil Falszewski
- * @param seed
- *        szerokosc ekranu,
- *        wysokosc ekranu
- * @return bitmap
- * 		   
+ *
  */
 public class Poziome extends Generator {
+
+    /**
+     * @param seed ziarno dla którego zostanie wygenerowana bitmapa
+     * @param w szerokosc ekranu,
+     * @param h wysokosc ekranu
+     * @return bitmap zwraca wygenerowaną bitmape
+     */
 	@Override
 	public Bitmap generate(long seed, int w, int h) {
 		init(w, h);
