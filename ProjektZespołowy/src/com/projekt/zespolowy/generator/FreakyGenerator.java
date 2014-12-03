@@ -21,19 +21,19 @@ public class FreakyGenerator extends Generator {
 	private Paint paint;
 	private List<Obszar> obszary;
 
-    /**
-     * Obiekt przechowujący dane o danym obszarze
-     */
+	/**
+	 * Obiekt przechowujący dane o danym obszarze
+	 */
 	private class Obszar {
 		private float startX, startY, stopX, stopY;
 
-        /**
-         * Konstruktor obszaru
-         * @param startX Współrzędna X, lewego górnego rogu obszaru
-         * @param startY Współrzędna Y, lewego górnego rogu obszaru
-         * @param stopX Współrzędna X, prawego dolnego rogu obszaru
-         * @param stopY Współrzędna Y, prawego dolnego rogu obszaru
-         */
+		/**
+		 * Konstruktor obszaru
+		 * @param startX Współrzędna X, lewego górnego rogu obszaru
+		 * @param startY Współrzędna Y, lewego górnego rogu obszaru
+		 * @param stopX Współrzędna X, prawego dolnego rogu obszaru
+		 * @param stopY Współrzędna Y, prawego dolnego rogu obszaru
+		 */
 		private Obszar(float startX, float startY, float stopX, float stopY) {
 			this.startX = startX;
 			this.startY = startY;
@@ -70,7 +70,7 @@ public class FreakyGenerator extends Generator {
 		paint = new Paint();
 		paint.setColor(KOLOR_LINII);
 		r = new Random(seed);
-        obszary = new LinkedList<Obszar>();
+		obszary = new LinkedList<Obszar>();
 		obszary.add(new Obszar(0, 0, w, h));
 		int n = r.nextInt(MAX_ILOSC_OBSZAROW / 2);
 		for (int i = 0; i < n; i++) {
@@ -81,10 +81,10 @@ public class FreakyGenerator extends Generator {
 		return bitmap;
 	}
 
-    /**
-     * Jeśli to możliwe dzieli podany obszar na dwa nowe i dodaje je do listy obszarów - obszary. W przeciwnym wypadku nie zmienia obszaru.
-     * @param o Obszar który chcemy podzielic.
-     */
+	/**
+	 * Jeśli to możliwe dzieli podany obszar na dwa nowe i dodaje je do listy obszarów - obszary. W przeciwnym wypadku nie zmienia obszaru.
+	 * @param o Obszar który chcemy podzielic.
+	 */
 	private void split(Obszar o) {
 		Obszar o1 = null, o2 = null;
 		if (o.getWidth() > o.getHeight()) {
@@ -113,14 +113,14 @@ public class FreakyGenerator extends Generator {
 			obszary.add(o);
 	}
 
-    /**
-     * Losowy float z przedziału (a, b)
-     * @param a minimalna wartość wylosowanej liczby
-     * @param b maksymalna wartość wylosowanej liczby
-     * @return wylosowna liczbę z przedziału (a, b)
-     */
+	/**
+	 * Losowy float z przedziału (a, b)
+	 * @param a minimalna wartość wylosowanej liczby
+	 * @param b maksymalna wartość wylosowanej liczby
+	 * @return wylosowna liczbę z przedziału (a, b)
+	 */
 	private float randomFloat(float a, float b) {
-        return r.nextFloat() * (b - a) + a;
+		return r.nextFloat() * (b - a) + a;
 	}
 
 	@Override

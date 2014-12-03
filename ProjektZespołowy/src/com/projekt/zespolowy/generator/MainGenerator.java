@@ -46,13 +46,13 @@ public class MainGenerator extends Activity implements OnClickListener {
 
 	public void generate(View _) {
 		EditText et = (EditText) findViewById(R.id.seedInput);
-        long seed;
-        try {
-            seed = Long.parseLong(et.getText().toString());
-        } catch (NumberFormatException e) {
-            return;
-        }
-        Intent intent = new Intent(this, Display.class);
+		long seed;
+		try {
+			seed = Long.parseLong(et.getText().toString());
+		} catch (NumberFormatException e) {
+			return;
+		}
+		Intent intent = new Intent(this, Display.class);
 		intent.putExtra("seed", seed)
 				.putExtra("generator", selectedGenerator);
 		startActivity(intent);

@@ -16,9 +16,22 @@ import android.view.Window;
 
 import com.projekt.zespolowy.R;
 
+/**
+ * Activity wyświetlający na ekranie wygenerowany obrazek.
+ *
+ * Klasa pobiera dwa elementy przekazane przez intent:
+ *
+ * @param generator objekt typu {@link Generator}
+ * @param seed liczba typu long, przekazywana do generatora
+ */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class Display extends Activity {
 
+	/**
+	 * View wyświetlający bitmapę przekazaną poprzez {@link setBitmap}.
+	 *
+	 * Bitmapa musi mieć te same wymiary, co obszar wyświetlania.
+	 */
 	static class DisplayView extends View {
 
 		public DisplayView(Context context) {
@@ -32,7 +45,10 @@ public class Display extends Activity {
 		@Override
 		protected void onDraw(Canvas canvas) {
 			super.onDraw(canvas);
-            if (bitmap == null) return;
+			if (bitmap == null ||
+				(bitmap.getHeight() != canvas.getHeight() &&
+				 bitmap.getWidth() != canvas.getWidth()))
+				return;
 			canvas.drawBitmap(bitmap, null, new Rect(0, 0, canvas.getWidth(),
 					canvas.getHeight()), null);
 		}
@@ -58,9 +74,7 @@ public class Display extends Activity {
 		if (seed == -1)
 			throw new Error("coś się zrypało w getextra");
 		Generator g = (Generator) intent.getSerializableExtra("generator");
-		// object to store display information
 		DisplayMetrics metrics = new DisplayMetrics();
-		// get display information
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		Bitmap b = g.generate(seed, metrics.widthPixels, metrics.heightPixels);
 		view.setBitmap(b);
