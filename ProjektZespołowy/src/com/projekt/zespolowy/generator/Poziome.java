@@ -1,42 +1,54 @@
 package com.projekt.zespolowy.generator;
 
+
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Paint;
 
 import java.util.Random;
- 
+
 /**
- * Linie w poziomie i pionie (dobrze było na nich widać scratche na ostatnich zajęciach)
- *
+ * Generator rysuje linie w poziomie i w pionie.
+ * 
+ * @author Kamil Falszewski
+ * @param seed
+ *        szerokosc ekranu,
+ *        wysokosc ekranu
+ * @return bitmap
+ * 		   
  */
-public class Poziome extends Generator
-{
+public class Poziome extends Generator {
 	@Override
-	public Bitmap generate(long seed, int w, int h)
-	{
+	public Bitmap generate(long seed, int w, int h) {
 		init(w, h);
+		/** Metoda rysująca */
 		Paint paint = new Paint();
+		/**
+		 * Zapewnienie losowości wygenerowanego obrazu, na podstawie podanego
+		 * seeda
+		 */
 		Random r = new Random(seed);
-		for (int y = 0; y<h; y++){
-				if (r.nextDouble()<0.30){
-						y++;
-				}
-			for (int x = 0; x<w; x++){
+		for (int y = 0; y < h; y++) {
+			if (r.nextDouble() < 0.30) {
+				y++;
+			}
+			for (int x = 0; x < w; x++) {
+				/** Określenie koloru generowanych linii */
 				paint.setColor(Color.BLACK);
 
-					x++;
+				x++;
 
-
+				/** Wywołanie rysowania */
 				canvas.drawPoint(x, y, paint);
 			}
 		}
 		return bitmap;
 	}
- 
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
+		/** Zwracanie nazwy autora generatora do głownego ekranu */
 		return "Kamil";
+
 	}
 }
