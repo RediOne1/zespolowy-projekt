@@ -1,3 +1,6 @@
+/**
+ * Moduł generujący obrazki
+ */
 package com.projekt.zespolowy.generator;
 
 import android.app.Activity;
