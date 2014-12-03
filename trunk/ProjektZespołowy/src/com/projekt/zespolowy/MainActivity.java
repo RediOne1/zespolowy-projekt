@@ -15,6 +15,9 @@ import android.widget.Button;
 import com.projekt.zespolowy.generator.MainGenerator;
 import com.projekt.zespolowy.skaner.MainSkaner;
 
+/**
+ * Activity uruchamiane przy starcie aplikacji.
+ */
 public class MainActivity extends Activity implements OnClickListener {
 
 	private Button generatorBtn, skanerBtn;

@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Klasa podstawowa wszystkich generatorów obrazków.
  *
- * Klasy pochodne muszą zaimplementować metodę {@link generate}.
+ * Klasy pochodne muszą zaimplementować metodę {@link #generate(long, int, int)} generate}.
  */
 public abstract class Generator implements Serializable
 {
