@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private static final int REQ_CODE_PICK_IMAGE_SCAN = 101;
 	private static final int REQ_CODE_PICK_IMAGE_BASE = 102;
-	private static final int IMAGE_SIZE = 250;
+	private static final int IMAGE_SIZE = 500;
 
 	private ImageView shareBtn, img_z_bazy, img_skanowane;
 	private View baseBtn, scanBtn;
@@ -46,6 +47,14 @@ public class MainSkaner extends Activity implements OnClickListener {
 		baseBtn = (View) findViewById(R.id.base_img_layout);
 		scanBtn = (View) findViewById(R.id.scan_img_layout);
 
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		img_z_bazy.setMaxWidth(metrics.widthPixels/2);
+		img_skanowane.setMaxWidth(metrics.widthPixels/2);
+
+		registerForContextMenu(scanBtn);
 		scanBtn.setOnClickListener(this);
 		baseBtn.setOnClickListener(this);
 		shareBtn.setOnClickListener(this);
@@ -119,7 +128,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 
 					BitmapFactory.Options o = new BitmapFactory.Options();
 					o.inJustDecodeBounds = true;
-					BitmapFactory.decodeFile(filePath, o);
+					Bitmap bmp = BitmapFactory.decodeFile(filePath, o);
 					final int REQUIRED_SIZE = IMAGE_SIZE;
 					int width_tmp = o.outWidth, height_tmp = o.outHeight;
 					int scale = 1;
@@ -147,11 +156,11 @@ public class MainSkaner extends Activity implements OnClickListener {
 
 			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
 				if (resultCode == Activity.RESULT_OK) {
-					Bitmap bmp = (Bitmap) data.getExtras().get("data");
 					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
 					byte[] byteArray = stream.toByteArray();
-					//TODO Zapisywanie zdjęcia z tablicy bitów(byteArray) w dobrej jakości, bo teraz zapisana jest tylko miniaturka.
+					BitmapFactory.Options o = new BitmapFactory.Options();
+					o.inJustDecodeBounds = true;
+					Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length, o);
 
 					img_skanowane.setImageBitmap(bmp);
 					skanowane = bmp;

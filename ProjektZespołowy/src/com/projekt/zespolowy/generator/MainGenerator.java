@@ -66,7 +66,7 @@ public class MainGenerator extends Activity implements OnClickListener {
 
 	/// lista dostępnych generatorów
 	static Generator[] generators = { new LinesGenerator(), new ExampleGenerator(),
-	                                new FreakyGenerator(), new Poziome() };
+	                                new FreakyGenerator(), new Poziome(), new NewGenerator() };
 	Generator selectedGenerator = generators[0];
 	
 	@Override
