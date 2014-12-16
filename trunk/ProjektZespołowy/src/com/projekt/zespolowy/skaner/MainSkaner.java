@@ -12,8 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,18 +23,21 @@ import android.widget.ImageView;
 import com.projekt.zespolowy.R;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 public class MainSkaner extends Activity implements OnClickListener {
 
-	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	private static final int REQ_CODE_CAPTURE_IMAGE = 100;
 	private static final int REQ_CODE_PICK_IMAGE_SCAN = 101;
 	private static final int REQ_CODE_PICK_IMAGE_BASE = 102;
 	private static final int IMAGE_SIZE = 500;
 
+	private Uri imageCapturePath;
 	private ImageView shareBtn, img_z_bazy, img_skanowane;
 	private View baseBtn, scanBtn;
 	private Bitmap z_bazy, skanowane;
 	private EditText seed_toSent;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ public class MainSkaner extends Activity implements OnClickListener {
 		scanBtn.setOnClickListener(this);
 		baseBtn.setOnClickListener(this);
 		shareBtn.setOnClickListener(this);
+
+		imageCapturePath = Uri.fromFile(new File(getExternalFilesDir(null), "capturedImage"));
 	}
 
 	/**
@@ -88,7 +93,8 @@ public class MainSkaner extends Activity implements OnClickListener {
 		switch (item.getItemId()) {
 			case R.id.capture_img:
 				intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-				startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, imageCapturePath);
+				startActivityForResult(intent, REQ_CODE_CAPTURE_IMAGE);
 				result = true;
 				break;
 			case R.id.pick_img:
@@ -154,13 +160,15 @@ public class MainSkaner extends Activity implements OnClickListener {
 				}
 				break;
 
-			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
+			case REQ_CODE_CAPTURE_IMAGE:
 				if (resultCode == Activity.RESULT_OK) {
-					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					byte[] byteArray = stream.toByteArray();
-					BitmapFactory.Options o = new BitmapFactory.Options();
-					o.inJustDecodeBounds = true;
-					Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length, o);
+					Bitmap bmp = BitmapFactory.decodeFile(imageCapturePath.getPath());
+
+//					ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//					byte[] byteArray = stream.toByteArray();
+//					BitmapFactory.Options o = new BitmapFactory.Options();
+//					o.inJustDecodeBounds = true;
+//					Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length, o);
 
 					img_skanowane.setImageBitmap(bmp);
 					skanowane = bmp;
