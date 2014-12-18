@@ -1,0 +1,5 @@
+/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/classes/debug
+/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-26adcce1550a7cf271758b89bb80475306825d56.jar
+/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-309cfc60890629d819e02a08d8dd597e03c0dee7.jar
+/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/pre-dexed/debug/classes-9f768cb4d01c354e4abc1eb63825c87e7ad3e6b5.jar
+/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/pre-dexed/debug/classes-898095ea16f7d187f1e8f1db3c99c003a2164c7c.jar

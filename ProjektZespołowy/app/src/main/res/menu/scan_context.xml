@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/capture_img"
+        android:title="@string/zrob_zdjecie"/>
+    <item
+        android:id="@+id/pick_img"
+        android:title="@string/wybierz_zdjecie"/>
+</menu>
