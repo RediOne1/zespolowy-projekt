@@ -9,7 +9,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
@@ -20,29 +19,18 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.projekt.zespolowy.R;
 
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfDMatch;
-import org.opencv.core.MatOfKeyPoint;
-import org.opencv.features2d.DMatch;
-import org.opencv.features2d.DescriptorExtractor;
-import org.opencv.features2d.DescriptorMatcher;
-import org.opencv.features2d.FeatureDetector;
-import org.opencv.highgui.Highgui;
-
 import java.io.File;
-import java.util.List;
 
 public class MainSkaner extends Activity implements OnClickListener {
 
 	private static final int REQ_CODE_CAPTURE_IMAGE = 100;
 	private static final int REQ_CODE_PICK_IMAGE_SCAN = 101;
 	private static final int REQ_CODE_PICK_IMAGE_BASE = 102;
-	private static final int IMAGE_SIZE = 500;
+	private static final int IMAGE_SIZE = 1000;
 
 	private Uri imageCapturePath;
 	private ImageView shareBtn, img_z_bazy, img_skanowane;
@@ -50,12 +38,15 @@ public class MainSkaner extends Activity implements OnClickListener {
 	private View baseBtn, scanBtn;
 	private EditText seed_toSent;
 	private String firstPath = null, secondPath = null;
+	private Bitmap firstBitmap = null, secondBitmap = null;
+	private CompareTemplate porownywarki[];
 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_skaner);
+		porownywarki = new CompareTemplate[]{new AdrianCompare(this)};
 		System.loadLibrary("opencv_java");
 		shareBtn = (ImageView) findViewById(R.id.share_seed);
 		seed_toSent = (EditText) findViewById(R.id.seed_toSent);
@@ -72,6 +63,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 		img_skanowane.setMaxWidth(metrics.widthPixels / 2);
 
 		registerForContextMenu(scanBtn);
+		registerForContextMenu(compareBtn);
 		scanBtn.setOnClickListener(this);
 		baseBtn.setOnClickListener(this);
 		shareBtn.setOnClickListener(this);
@@ -93,8 +85,13 @@ public class MainSkaner extends Activity implements OnClickListener {
 		if (v == scanBtn) {
 			getMenuInflater().inflate(R.menu.scan_context, menu);
 			menu.setHeaderTitle(R.string.wybierz_opcje);
+		} else if (v == compareBtn) {
+			menu.setHeaderTitle("Wybierz porównywarke");
+			for (CompareTemplate ct : porownywarki)
+				menu.add(0, v.getId(), 0, ct.toString());
 		}
 	}
+
 
 	/**
 	 * Funkcja wywoływana po kliknieciu obiektu w menu kontekstowym
@@ -116,12 +113,16 @@ public class MainSkaner extends Activity implements OnClickListener {
 				break;
 			case R.id.pick_img:
 				intent = new Intent(
-				Intent.ACTION_PICK,
-				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+					                    Intent.ACTION_PICK,
+					                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				startActivityForResult(intent, REQ_CODE_PICK_IMAGE_SCAN);
 				result = true;
 				break;
 		}
+		for (CompareTemplate ct : porownywarki)
+			if(ct.toString().equals(item.getTitle()))
+				ct.compare(firstPath, secondPath);
+
 		return result;
 	}
 
@@ -143,7 +144,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 					String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
 					Cursor cursor = getContentResolver().query(selectedImage,
-					filePathColumn, null, null, null);
+						                                           filePathColumn, null, null, null);
 					cursor.moveToFirst();
 
 					int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
@@ -162,7 +163,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 					int scale = 1;
 					while (true) {
 						if (width_tmp / 2 < REQUIRED_SIZE
-						|| height_tmp / 2 < REQUIRED_SIZE)
+							     || height_tmp / 2 < REQUIRED_SIZE)
 							break;
 						width_tmp /= 2;
 						height_tmp /= 2;
@@ -171,11 +172,13 @@ public class MainSkaner extends Activity implements OnClickListener {
 					BitmapFactory.Options o2 = new BitmapFactory.Options();
 					o2.inSampleSize = scale;
 					Bitmap yourSelectedImage2 = BitmapFactory.decodeFile(filePath,
-					o2);
+						                                                     o2);
 					if (requestCode == REQ_CODE_PICK_IMAGE_BASE) {
 						img_z_bazy.setImageBitmap(yourSelectedImage2);
+						firstBitmap = yourSelectedImage2;
 					} else {
 						img_skanowane.setImageBitmap(yourSelectedImage2);
+						secondBitmap = yourSelectedImage2;
 					}
 				}
 				break;
@@ -218,57 +221,13 @@ public class MainSkaner extends Activity implements OnClickListener {
 			share();
 		else if (v == baseBtn) {
 			Intent intent = new Intent(
-			Intent.ACTION_PICK,
-			android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				                           Intent.ACTION_PICK,
+				                           android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			startActivityForResult(intent, REQ_CODE_PICK_IMAGE_BASE);
 		} else if (v == scanBtn)
 			openContextMenu(v);
 		else if (v == compareBtn) {
-			new Compare().execute();
-		}
-	}
-
-	public class Compare extends AsyncTask<Void, Void, MatOfDMatch> {
-
-		@Override
-		protected MatOfDMatch doInBackground(Void... arg0) {
-			//Load images to compare
-			Mat img1 = Highgui.imread(firstPath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
-			Mat img2 = Highgui.imread(secondPath, Highgui.CV_LOAD_IMAGE_GRAYSCALE);
-
-			MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
-			MatOfKeyPoint keypoints2 = new MatOfKeyPoint();
-			Mat descriptors1 = new Mat();
-			Mat descriptors2 = new Mat();
-
-//Definition of ORB keypoint detector and descriptor extractors
-			FeatureDetector detector = FeatureDetector.create(FeatureDetector.ORB);
-			DescriptorExtractor extractor = DescriptorExtractor.create(DescriptorExtractor.ORB);
-
-//Detect keypoints
-			detector.detect(img1, keypoints1);
-			detector.detect(img2, keypoints2);
-//Extract descriptors
-			extractor.compute(img1, keypoints1, descriptors1);
-			extractor.compute(img2, keypoints2, descriptors2);
-
-//Definition of descriptor matcher
-			DescriptorMatcher matcher = DescriptorMatcher.create(DescriptorMatcher.BRUTEFORCE_HAMMING);
-
-//Match points of two images
-			MatOfDMatch matches = new MatOfDMatch();
-			matcher.match(descriptors1, descriptors2, matches);
-			return matches;
-		}
-
-		@Override
-		protected void onPostExecute(MatOfDMatch matOfDMatch) {
-			List<DMatch> dMatch = matOfDMatch.toList();
-			String wynik = "";
-			for (int i = 0; i < dMatch.size(); i++)
-				wynik += matOfDMatch.toList().get(i).toString() + "\n\n";
-			((TextView) findViewById(R.id.result)).setText(wynik);
-			super.onPostExecute(matOfDMatch);
+			openContextMenu(v);
 		}
 	}
 }
