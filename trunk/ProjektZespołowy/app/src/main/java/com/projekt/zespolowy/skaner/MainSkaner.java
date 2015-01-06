@@ -46,7 +46,11 @@ public class MainSkaner extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_skaner);
+
+
 		porownywarki = new CompareTemplate[]{new AdrianCompare(this)};
+
+
 		System.loadLibrary("opencv_java");
 		shareBtn = (ImageView) findViewById(R.id.share_seed);
 		seed_toSent = (EditText) findViewById(R.id.seed_toSent);
@@ -87,8 +91,8 @@ public class MainSkaner extends Activity implements OnClickListener {
 			menu.setHeaderTitle(R.string.wybierz_opcje);
 		} else if (v == compareBtn) {
 			menu.setHeaderTitle("Wybierz porównywarke");
-			for (CompareTemplate ct : porownywarki)
-				menu.add(0, v.getId(), 0, ct.toString());
+			for (int i = 0; i < porownywarki.length; i++)
+				menu.add(0, i, 0, porownywarki[i].toString());
 		}
 	}
 
@@ -118,11 +122,9 @@ public class MainSkaner extends Activity implements OnClickListener {
 				startActivityForResult(intent, REQ_CODE_PICK_IMAGE_SCAN);
 				result = true;
 				break;
+			case 0:
+				porownywarki[0].compare(firstPath, secondPath);
 		}
-		for (CompareTemplate ct : porownywarki)
-			if(ct.toString().equals(item.getTitle()))
-				ct.compare(firstPath, secondPath);
-
 		return result;
 	}
 
