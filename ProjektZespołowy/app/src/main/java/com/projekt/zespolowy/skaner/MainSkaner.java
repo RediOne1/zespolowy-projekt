@@ -124,6 +124,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 				break;
 			case 0:
 				porownywarki[0].compare(firstPath, secondPath);
+				break;
 		}
 		return result;
 	}
