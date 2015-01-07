@@ -14,7 +14,7 @@ public abstract class CompareTemplate {
 
 	public TextView result;
 
-	public CompareTemplate(Activity activity){
+	public CompareTemplate(Activity activity) {
 		result = (TextView) activity.findViewById(R.id.result);
 	}
 
