@@ -117,13 +117,16 @@ public class MainSkaner extends Activity implements OnClickListener {
 				break;
 			case R.id.pick_img:
 				intent = new Intent(
-					                    Intent.ACTION_PICK,
-					                    android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				Intent.ACTION_PICK,
+				android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 				startActivityForResult(intent, REQ_CODE_PICK_IMAGE_SCAN);
 				result = true;
 				break;
 			case 0:
 				porownywarki[0].compare(firstPath, secondPath);
+				break;
+			case 1:
+				porownywarki[1].compare(firstBitmap, secondBitmap);
 				break;
 		}
 		return result;
@@ -147,7 +150,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 					String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
 					Cursor cursor = getContentResolver().query(selectedImage,
-						                                           filePathColumn, null, null, null);
+					filePathColumn, null, null, null);
 					cursor.moveToFirst();
 
 					int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
@@ -166,7 +169,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 					int scale = 1;
 					while (true) {
 						if (width_tmp / 2 < REQUIRED_SIZE
-							     || height_tmp / 2 < REQUIRED_SIZE)
+						|| height_tmp / 2 < REQUIRED_SIZE)
 							break;
 						width_tmp /= 2;
 						height_tmp /= 2;
@@ -175,7 +178,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 					BitmapFactory.Options o2 = new BitmapFactory.Options();
 					o2.inSampleSize = scale;
 					Bitmap yourSelectedImage2 = BitmapFactory.decodeFile(filePath,
-						                                                     o2);
+					o2);
 					if (requestCode == REQ_CODE_PICK_IMAGE_BASE) {
 						img_z_bazy.setImageBitmap(yourSelectedImage2);
 						firstBitmap = yourSelectedImage2;
@@ -224,8 +227,8 @@ public class MainSkaner extends Activity implements OnClickListener {
 			share();
 		else if (v == baseBtn) {
 			Intent intent = new Intent(
-				                           Intent.ACTION_PICK,
-				                           android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+			Intent.ACTION_PICK,
+			android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			startActivityForResult(intent, REQ_CODE_PICK_IMAGE_BASE);
 		} else if (v == scanBtn)
 			openContextMenu(v);

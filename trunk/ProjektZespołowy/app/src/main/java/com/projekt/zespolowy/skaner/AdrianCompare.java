@@ -3,9 +3,6 @@ package com.projekt.zespolowy.skaner;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
-import android.widget.TextView;
-
-import com.projekt.zespolowy.R;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDMatch;
