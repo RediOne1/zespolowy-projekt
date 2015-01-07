@@ -48,7 +48,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_main_skaner);
 
 
-		porownywarki = new CompareTemplate[]{new AdrianCompare(this)};
+		porownywarki = new CompareTemplate[]{new AdrianCompare(this), new findScratch(this)};
 
 
 		System.loadLibrary("opencv_java");
