@@ -8,6 +8,8 @@ import android.graphics.Paint;
 import android.os.Environment;
 import android.util.Log;
 
+import java.awt.image.BufferedImage;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,8 +59,8 @@ public class findScratch extends CompareTemplate {
 		Bitmap workingBitmap = Bitmap.createBitmap(obraz);
 		Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
 		Canvas canvas = new Canvas(mutableBitmap);
-		int width = obraz.getWidth();
-		int height = obraz.getHeight();
+		int width = obraz.getWidth() - 1;
+		int height = obraz.getHeight() - 1;
 
 		int x = 0;
 		int y = 0;
@@ -113,23 +115,23 @@ public class findScratch extends CompareTemplate {
 				value = red * blue * green;
 
 				if (value >= R1 && value <= R2) {    // rysa
-					paint.setColor(Color.BLACK);
+					//paint.setColor(Color.BLACK);
+					obraz.setPixel(j,i,Color.BLACK);
 				} else if (value >= L1 && value <= L2) {    // rysa
-					paint.setColor(Color.BLACK);
+					//paint.setColor(Color.BLACK);
+					obraz.setPixel(j,i,Color.BLACK);
 				} else {
-					paint.setColor(Color.WHITE);
-
+					//paint.setColor(Color.WHITE);
+					obraz.setPixel(j,i,Color.WHITE);
 				}
 
-				canvas.drawPoint(x, y, paint);
+				//canvas.drawPoint(j, i, paint); // ?
 			}
 
 		}
 
-		return mutableBitmap;
+		return mutableBitmap; // ?
 	}
-
-	// zakomentowane z powodu nie dolaczenia bibliotek
 
 	/**
 	 * Metoda zapisuje obraz w pliku
