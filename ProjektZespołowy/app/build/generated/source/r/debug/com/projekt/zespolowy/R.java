@@ -42,65 +42,100 @@ containing a value of this type.
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int noimage=0x7f020001;
+        public static final int img=0x7f020001;
+        public static final int noimage=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f080016;
+        public static final int action_settings=0x7f080027;
         public static final int any=0x7f080000;
         public static final int back=0x7f080001;
-        public static final int base_img_layout=0x7f080010;
-        public static final int capture_img=0x7f080017;
+        public static final int base_img_layout=0x7f080015;
+        public static final int button1=0x7f080009;
+        public static final int capture_img=0x7f080028;
+        public static final int checkBox=0x7f080024;
         public static final int displayView=0x7f080003;
+        public static final int editText1=0x7f080021;
+        public static final int editText2=0x7f080022;
+        public static final int emptyLayout=0x7f08000a;
+        public static final int finalImage=0x7f080025;
         public static final int front=0x7f080002;
-        public static final int generateButton=0x7f08000b;
-        public static final int generatorsSpinner=0x7f08000a;
-        public static final int img_skanowane=0x7f080013;
-        public static final int img_z_bazy=0x7f080011;
-        public static final int linearLayout1=0x7f08000c;
-        public static final int linearLayout2=0x7f08000f;
+        public static final int generateButton=0x7f080010;
+        public static final int generatorsSpinner=0x7f08000f;
+        public static final int img1=0x7f080008;
+        public static final int img2=0x7f08000b;
+        public static final int img_skanowane=0x7f080018;
+        public static final int img_z_bazy=0x7f080016;
+        public static final int linearLayout1=0x7f080011;
+        public static final int linearLayout2=0x7f080014;
         public static final int main_generator_btn=0x7f080004;
         public static final int main_skaner_btn=0x7f080006;
-        public static final int pick_img=0x7f080018;
-        public static final int porownajBtn=0x7f080014;
-        public static final int result=0x7f080015;
-        public static final int scan_img_layout=0x7f080012;
-        public static final int seedInput=0x7f080009;
-        public static final int seed_toSent=0x7f08000d;
-        public static final int share_seed=0x7f08000e;
-        public static final int textView=0x7f080007;
+        public static final int menu_settings=0x7f080026;
+        public static final int message=0x7f080023;
+        public static final int pick_img=0x7f080029;
+        public static final int porownajBtn=0x7f080019;
+        public static final int radio0=0x7f08001d;
+        public static final int radio1=0x7f08001e;
+        public static final int radio2=0x7f08001f;
+        public static final int radio3=0x7f080020;
+        public static final int radioGroup1=0x7f08001c;
+        public static final int result=0x7f08001a;
+        public static final int scan_img_layout=0x7f080017;
+        public static final int scrollView1=0x7f08001b;
+        public static final int seedInput=0x7f08000e;
+        public static final int seed_toSent=0x7f080012;
+        public static final int share_seed=0x7f080013;
+        public static final int textView=0x7f08000c;
         public static final int textView1=0x7f080005;
-        public static final int textView2=0x7f080008;
+        public static final int textView2=0x7f08000d;
+        public static final int tv=0x7f080007;
     }
     public static final class layout {
         public static final int activity_display=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int activity_main_generator=0x7f030002;
-        public static final int activity_main_skaner=0x7f030003;
+        public static final int activity_main_comparer=0x7f030002;
+        public static final int activity_main_generator=0x7f030003;
+        public static final int activity_main_skaner=0x7f030004;
+        public static final int activity_settings=0x7f030005;
+        public static final int image_view=0x7f030006;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
-        public static final int main_generator=0x7f070001;
-        public static final int main_skaner=0x7f070002;
-        public static final int scan_context=0x7f070003;
+        public static final int activity_main_comparer_menu=0x7f070000;
+        public static final int main=0x7f070001;
+        public static final int main_generator=0x7f070002;
+        public static final int main_skaner=0x7f070003;
+        public static final int scan_context=0x7f070004;
     }
     public static final class string {
-        public static final int action_settings=0x7f050000;
-        public static final int app_name=0x7f050001;
-        public static final int generator=0x7f050002;
-        public static final int hello_world=0x7f050003;
-        public static final int porownaj=0x7f050004;
-        public static final int seed=0x7f050005;
-        public static final int seed_do_wyslania=0x7f050006;
-        public static final int skaner=0x7f050007;
-        public static final int skanowane_zdjecie=0x7f050008;
-        public static final int title_activity_display=0x7f050009;
-        public static final int title_activity_main_generator=0x7f05000a;
-        public static final int title_activity_main_skaner=0x7f05000b;
-        public static final int wybierz_opcje=0x7f05000c;
-        public static final int wybierz_tryb=0x7f05000d;
-        public static final int wybierz_zdjecie=0x7f05000e;
-        public static final int zdjecie_z_bazy=0x7f05000f;
-        public static final int zrob_zdjecie=0x7f050010;
+        public static final int Apply=0x7f050000;
+        public static final int action_settings=0x7f050001;
+        public static final int app_name=0x7f050002;
+        public static final int brief=0x7f050003;
+        public static final int brisk=0x7f050004;
+        public static final int freak=0x7f050005;
+        public static final int generator=0x7f050006;
+        public static final int hello_world=0x7f050007;
+        public static final int menu_settings=0x7f050008;
+        public static final int min_dist=0x7f050009;
+        public static final int min_dup=0x7f05000a;
+        public static final int orb=0x7f05000b;
+        public static final int porownaj=0x7f05000c;
+        public static final int seed=0x7f05000d;
+        public static final int seed_do_wyslania=0x7f05000e;
+        public static final int select=0x7f05000f;
+        public static final int sift=0x7f050010;
+        public static final int skaner=0x7f050011;
+        public static final int skanowane_zdjecie=0x7f050012;
+        public static final int start=0x7f050013;
+        public static final int surf=0x7f050014;
+        public static final int title_activity_display=0x7f050015;
+        public static final int title_activity_main_generator=0x7f050016;
+        public static final int title_activity_main_skaner=0x7f050017;
+        public static final int title_activity_settings=0x7f050018;
+        public static final int wybierz_opcje=0x7f050019;
+        public static final int wybierz_tryb=0x7f05001a;
+        public static final int wybierz_zdjecie=0x7f05001b;
+        public static final int zdjecie_z_bazy=0x7f05001c;
+        public static final int zrob_zdjecie=0x7f05001d;
     }
     public static final class style {
         /** 
