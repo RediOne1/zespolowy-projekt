@@ -8,8 +8,6 @@ import android.graphics.Paint;
 import android.os.Environment;
 import android.util.Log;
 
-import java.awt.image.BufferedImage;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;

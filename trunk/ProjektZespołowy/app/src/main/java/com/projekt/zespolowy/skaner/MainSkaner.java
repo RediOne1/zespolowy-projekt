@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.projekt.zespolowy.R;
+import com.projekt.zespolowy.comparer.MainComparer;
 
 import java.io.File;
 
@@ -93,6 +94,7 @@ public class MainSkaner extends Activity implements OnClickListener {
 			menu.setHeaderTitle("Wybierz porównywarke");
 			for (int i = 0; i < porownywarki.length; i++)
 				menu.add(0, i, 0, porownywarki[i].toString());
+			menu.add(0, porownywarki.length, 0, "OpenCV");
 		}
 	}
 
@@ -128,6 +130,11 @@ public class MainSkaner extends Activity implements OnClickListener {
 			case 1:
 				porownywarki[1].compare(firstBitmap, secondBitmap);
 				break;
+			case 2:
+				Intent i = new Intent(this, MainComparer.class);
+				startActivity(i);
+				break;
+
 		}
 		return result;
 	}
