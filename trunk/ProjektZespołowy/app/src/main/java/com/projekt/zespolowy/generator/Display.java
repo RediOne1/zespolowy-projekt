@@ -32,7 +32,7 @@ public class Display extends Activity {
 	 * <p/>
 	 * Bitmapa musi mieć te same wymiary, co obszar wyświetlania.
 	 */
-	static class DisplayView extends View {
+	public static class DisplayView extends View {
 
 		public DisplayView(Context context) {
 			super(context);
