@@ -21,14 +21,11 @@ import com.projekt.zespolowy.R;
  * <p/>
  * Klasa pobiera dwa elementy przekazane przez intent:
  *
- * @param generator objekt typu {@link Generator}
- * @param seed      liczba typu long, przekazywana do generatora
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class Display extends Activity {
 
 	/**
-	 * View wyświetlający bitmapę przekazaną poprzez {@link setBitmap}.
 	 * <p/>
 	 * Bitmapa musi mieć te same wymiary, co obszar wyświetlania.
 	 */

@@ -5,8 +5,8 @@
         jar="/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/exploded-aar/ProjektZespołowy/openCVLibrary2410/unspecified/classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="73e2a728e97cde806ab867baa60979ecf2f9a2f3">
-        <dex dex="/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/pre-dexed/debug/classes-9f768cb4d01c354e4abc1eb63825c87e7ad3e6b5.jar" />
+        sha1="0d950773ed6be9a8490c99df39e6aeac9a33ef4c">
+        <dex dex="/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/pre-dexed/release/classes-9f768cb4d01c354e4abc1eb63825c87e7ad3e6b5.jar" />
     </item>
     <item
         jar="/home/adrian/Pulpit/Programy/android-studio/ProjektZespołowy/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
