@@ -1,6 +1,35 @@
 /**
  * \mainpage
- * Tu będzie ogólny opis całego projektu
+ * Projekt ten ma na celu zbadanie możliwości użycia ekranu oraz aparatu telefonu komórkowego do
+ * uwierzytelniania danego urządzenia. Na ekran telefou miałaby zostać nałożona folia,
+ * która byłaby w sposób niepodrabialny mechanicznie zadrapana. Na ekranie telefonu byłby
+ * wyświetlony wzór, który razem z folią dawałby obraz wynikowy, możliwy do zweryfikowania
+ * przez drugie urządzenie wyposażone w aparat.
+ *
+ * Program skłąda się z dwóch części, generatora i skanera. Klasa [MainActivity](@ref com.projekt.zespolowy.MainActivity),
+ * która jest punktem wejścia aplikacji, wyświetla proste menu pozwalające wybrać moduł.
+ *  - Generator
+ *
+ *    Jest to moduł generujący wzory używając różnych algorytmów. Główny interfejs znajduje
+ *    się w klasie [MainGenerator](@ref com.projekt.zespolowy.generator.MainGenerator).
+ *    Pozwala on na wprowadzenie wartości *seed* oraz wybranie algorytmu z listy wszystkich dostępnych.
+ *
+ *    Po wciśnięciu przycisku *Generuj* uruchamiany jest widok
+ *    [Display](@ref com.projekt.zespolowy.generator.Display), do którego poprzez *intent*
+ *    przekazywany jest parametr *seed* oraz serializowany obiekt implementacji
+ *    [generatora](@ref com.projekt.zespolowy.generator.Generator). Klasa
+ *    [Display](@ref com.projekt.zespolowy.generator.Display) definiuje własny widok
+ *    [DisplayView](@ref com.projekt.zespolowy.generator.Display.DisplayView), którego używa do
+ *    wyświetlenia bitmapy zwróconej przez metodę generate() generatora.
+ *
+ *    Klasa abstrakcyjna [Generator](@ref com.projekt.zespolowy.generator.Generator) jest podstawą
+ *    wszystkich algorytmów generowania wzorów. Każdy generator implementuje funkcję generate,
+ *    która pobiera seed, szerokość oraz wysokość i zwraca wygenerowany wzór pod postacią
+ *    [android.graphics.Bitmap](https://developer.android.com/reference/android/graphics/Bitmap.html).
+ *
+ *  - Skaner i porównywarka
+ *
+ *    tu coś napiszecie
  */
 
 package com.projekt.zespolowy;
