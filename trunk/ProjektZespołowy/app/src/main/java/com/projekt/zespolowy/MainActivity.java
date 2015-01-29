@@ -29,7 +29,16 @@
  *
  *  - Skaner i porównywarka
  *
- *    tu coś napiszecie
+ * findScratch:
+ *	Klasa spelnia role filtra nakladanego na wykonane zdjecia ekranow. 
+ *	Na podstawie uśrednionej wartości bieli wyszukuje punkty podejrzane o bycie rysami.
+ *	Pola takie kolorowane są na czarno. Wszystkie piksele nie będące domniemanymi rysami
+ *	zostają pokolorowane na biało.
+ *	Celem takiego działania jest próba jednoznacznego określenia położenia rys.
+ *	Klasa działa wyjątkowo wolno ze względu na dużą rodzielczość zdjęć 
+ *	oraz algorytm o rozwiazaniu silowym - każdy z pikseli zdjęcia zostaje sprawdzony.
+ *	Zdjęcia po przeszukaniu zostają zapisane na urządzeniu.
+ *
  */
 
 package com.projekt.zespolowy;
